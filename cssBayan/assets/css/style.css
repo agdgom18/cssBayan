@@ -1,10 +1,20 @@
 * {
   box-sizing: border-box;
 }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 25px;
+}
+h1 {
+  margin-bottom: 20px;
+  font-size: 48px;
+  border-bottom: 1px solid #717171;
+  padding-bottom: 5px;
+}
 .accordion {
-  max-width: 400px;
   box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   background-color: #009578;
 }
@@ -41,5 +51,14 @@
   background: white;
   line-height: 1.6;
   font-size: 0.85em;
-  /* display: none; */
+  display: none;
+}
+.accordion__input {
+  display: none;
+}
+.accordion__input:checked ~ .accordion__content {
+  display: block;
+}
+.accordion__input:checked ~ .accordion__label::after {
+  transform: translateY(-50%) rotate(0.5turn);
 }
