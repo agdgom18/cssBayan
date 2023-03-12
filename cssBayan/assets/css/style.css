@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
 * {
   box-sizing: border-box;
 }
 body {
   width: auto;
+  font-family: 'Poppins', sans-serif;
 }
 .container {
   max-width: 75rem;
@@ -29,18 +32,13 @@ h1 {
 }
 
 .accordion__label {
-  padding: 0.875rem 1.25rem;
-}
-
-.accordion__label {
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: rgb(0, 0, 0);
   font-weight: 500;
+  padding: 0.875rem 1.25rem;
   cursor: pointer;
-  /* no important */
-  position: relative;
   transition: background 0.1s;
 }
 
@@ -53,9 +51,18 @@ h1 {
   transition: transform 0.3s ease-in;
 }
 .accordion__content {
+  display: block;
+  cursor: pointer;
   height: 0;
   overflow: hidden;
-  transition: 0.8s;
+}
+/* Img */
+.photo {
+  display: block;
+  max-width: 25rem;
+  margin: 0 auto;
+  opacity: 0;
+  transition: opacity 0.3s ease-in, filter 1s ease-out;
 }
 .accordion__input {
   display: none;
@@ -63,9 +70,8 @@ h1 {
 .accordion__input:checked ~ .accordion__content {
   height: 100%;
 }
-.accordion__input:checked ~ .accordion__content .photo {
-  width: 25rem;
-  max-height: 100%;
+.accordion__input:checked ~ .accordion__content > .photo {
+  opacity: 1;
 }
 
 .accordion__input:checked ~ .accordion__label::after {
@@ -75,37 +81,14 @@ h1 {
 .accordion__input:checked ~ .accordion__label {
   color: #0000ff;
 }
-/* Img */
-.photo {
-  display: block;
-  width: 0rem;
-  max-height: 0%;
-  margin: 0 auto;
-  transition: width 0.8s ease-out, max-height 0.8s ease-out, filter 1s ease-out;
-}
 
 /* Hover animations accordion  */
-
 .accordion:hover .accordion__label::after {
   display: block;
 }
 
-/* Hover to element */
-.section:hover {
-  cursor: pointer;
-}
-.section:hover .accordion__content {
-  height: 100%;
-}
-.section:hover .photo {
-  width: 25rem;
-  max-height: 100%;
-}
-
 /*  activre behevior */
-.section {
-  transition: all 0.8s;
-}
+
 .section:active .photo {
   filter: brightness(130%);
   -webkit-filter: brightness(130%);
@@ -116,3 +99,25 @@ h1 {
 }
 
 /* Adaptive */
+@media (hover: none) {
+  /* when hover isn't supported */
+  .accordion__label::after {
+    display: block;
+  }
+  .photo {
+    max-width: 80%;
+  }
+}
+@media (hover: hover) {
+  /* when hover is supported */
+  .section:hover {
+    cursor: pointer;
+  }
+
+  .section:hover .accordion__content {
+    height: auto;
+  }
+  .section:hover .accordion__content > .photo {
+    opacity: 1;
+  }
+}
