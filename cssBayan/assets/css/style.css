@@ -22,7 +22,6 @@ h1 {
 }
 
 .accordion {
-  /* box-shadow: 0 0 10px rgb(0, 0, 0, 0.2); */
   border-radius: 4px;
   overflow: hidden;
   background-color: #f5f5eb;
@@ -34,8 +33,10 @@ h1 {
 }
 
 .accordion__label {
-  display: block;
-  color: rgb(45, 20, 156);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(0, 0, 0);
   font-weight: 500;
   cursor: pointer;
   /* no important */
@@ -45,44 +46,42 @@ h1 {
 
 .accordion__label::after {
   display: none;
-  content: '';
-  position: absolute;
-  top: 25%;
-  right: 20px;
-  width: 32px;
-  height: 32px;
-  background-image: url(/cssBayan/assets/img/icons/add.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
+  content: '╳';
+  transform: rotate(45deg);
+  font-weight: bold;
+  font-size: 16px;
   transition: transform 0.3s ease-in;
 }
 .accordion__content {
   height: 0;
-  transform: scale(0);
   overflow: hidden;
-  transition: 0.5s;
+  transition: 0.8s;
 }
 .accordion__input {
   display: none;
 }
 .accordion__input:checked ~ .accordion__content {
   height: 100%;
-  transform: scale(1);
+}
+.accordion__input:checked ~ .accordion__content .photo {
+  width: 400px;
+  max-height: 100%;
 }
 
 .accordion__input:checked ~ .accordion__label::after {
-  transform: rotate(45deg);
+  transform: rotate(90deg);
 }
 
 .accordion__input:checked ~ .accordion__label {
-  color: black;
+  color: #0000ff;
 }
 /* Img */
 .photo {
   display: block;
-  width: 400px;
-  height: auto;
+  width: 0px;
+  max-height: 0%;
   margin: 0 auto;
+  transition: width 0.8s ease-out, max-height 0.8s ease-out, filter 1s ease-out;
 }
 
 /* Hover animations accordion  */
@@ -97,5 +96,21 @@ h1 {
 }
 .section:hover .accordion__content {
   height: 100%;
-  transform: scale(1);
+}
+.section:hover .photo {
+  width: 400px;
+  max-height: 100%;
+}
+
+/*  activre behevior */
+.section {
+  transition: all 0.8s;
+}
+.section:active .photo {
+  filter: brightness(130%);
+  -webkit-filter: brightness(130%);
+  -moz-filter: brightness(130%);
+}
+.section:active .accordion__label {
+  color: #1e78ff;
 }
