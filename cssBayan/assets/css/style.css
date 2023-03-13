@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+body {
+  width: auto;
+  font-family: 'Poppins', sans-serif;
+}
+.container {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding-top: 1.563rem;
+  background-color: #f5f5eb;
+}
+h1 {
+  margin-bottom: 1.25rem;
+  font-size: 3rem;
+  border-bottom: 0.063rem solid #717171;
+  padding-bottom: 0.313rem;
+}
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.accordion {
+  border-radius: 0.25rem;
+  overflow: hidden;
+  background-color: #f5f5eb;
+  min-height: 100vh;
+}
+
+.accordion__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  padding: 0.875rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.accordion__label::after {
+  display: none;
+  content: '╳';
+  transform: rotate(45deg);
+  font-weight: bold;
+  font-size: 1rem;
+  transition: transform 0.3s ease-in;
+}
+.accordion__content {
+  display: block;
+  cursor: pointer;
+  height: 0;
+  overflow: hidden;
+}
+/* Img */
+.photo {
+  display: block;
+  max-width: 25rem;
+  margin: 0 auto;
+  opacity: 0;
+  transition: opacity 0.3s ease-in, filter 1s ease-out;
+}
+.accordion__input {
+  display: none;
+}
+.accordion__input:checked ~ .accordion__content {
+  height: 100%;
+}
+.accordion__input:checked ~ .accordion__content > .photo {
+  opacity: 1;
+}
+
+.accordion__input:checked ~ .accordion__label::after {
+  transform: rotate(90deg);
+}
+
+.accordion__input:checked ~ .accordion__label {
+  color: #0000ff;
+}
+
+/* Hover animations accordion  */
+.accordion:hover .accordion__label::after {
+  display: block;
+}
+
+/*  activre behevior */
+
+.section:active .photo {
+  filter: brightness(130%);
+  -webkit-filter: brightness(130%);
+  -moz-filter: brightness(130%);
+}
+.section:active .accordion__label {
+  color: #1e78ff;
+}
+
+/* Adaptive */
+@media (hover: none) {
+  /* when hover isn't supported */
+  .accordion__label::after {
+    display: block;
+  }
+  .photo {
+    max-width: 80%;
+  }
+}
+@media (hover: hover) {
+  /* when hover is supported */
+  .section:hover {
+    cursor: pointer;
+  }
+
+  .section:hover .accordion__content {
+    height: auto;
+  }
+  .section:hover .accordion__content > .photo {
+    opacity: 1;
+  }
+}
